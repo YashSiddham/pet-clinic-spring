@@ -1,4 +1,4 @@
-package com.siddhamyash.petclinicspring.services;
+package com.siddhamyash.petclinicspring.service;
 
 import java.util.Set;
 

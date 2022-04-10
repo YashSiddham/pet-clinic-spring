@@ -1,12 +1,13 @@
 package com.siddhamyash.petclinicspring.service.map;
 
 import com.siddhamyash.petclinicspring.model.Owner;
-import com.siddhamyash.petclinicspring.model.Person;
 import com.siddhamyash.petclinicspring.service.OwnerService;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
-public class OwnerServiceMap extends AbstractMapService<Long, Owner> implements OwnerService {
+@Component
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -27,7 +28,7 @@ public class OwnerServiceMap extends AbstractMapService<Long, Owner> implements 
     @Override
     public Owner save(Owner object) {
 //        object.setId(object.getId()+1000);
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override

@@ -15,50 +15,51 @@ import org.springframework.stereotype.Component;
 //@Slf4j(topic = "Dataloader Service")
 public class DataLoader implements CommandLineRunner {
 
-    Logger log = LoggerFactory.getLogger(DataLoader.class);
+//    Logger log = LoggerFactory.getLogger(DataLoader.class);
 
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-        this.ownerService = new OwnerServiceMap();
-        this.vetService = new VetServiceMap();
+    public DataLoader(OwnerServiceMap ownerService, VetServiceMap vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
     var owner1 = new Owner();
-    owner1.setId(1L);
+//    owner1.setId(1L);
     owner1.setFirstName("Michael");
     owner1.setLastName("Weston");
 
     ownerService.save(owner1);
 
     var owner2 = new Owner();
-    owner1.setId(2L);
-    owner1.setFirstName("Michael 2");
-    owner1.setLastName("Weston 2");
+//    owner1.setId(2L);
+    owner2.setFirstName("Michael 2");
+    owner2.setLastName("Weston 2");
 
     ownerService.save(owner2);
 
-    log.info("Loaded Owners....");
+//    log.info("Loaded Owners....");
+    System.out.println("Loaded Owners....");
 
     var vet1 = new Vet();
-    vet1.setId(1L);
+//    vet1.setId(1L);
     vet1.setFirstName("Sam");
     vet1.setLastName("Axe");
 
     vetService.save(vet1);
 
     var vet2 = new Vet();
-    vet2.setId(2L);
+//    vet2.setId(2L);
     vet2.setFirstName("Sam 2");
     vet2.setLastName("Axe 2");
 
     vetService.save(vet2);
 
-    log.info("Loaded Vets....");
+//    log.info("Loaded Vets....");
 
     }
 }

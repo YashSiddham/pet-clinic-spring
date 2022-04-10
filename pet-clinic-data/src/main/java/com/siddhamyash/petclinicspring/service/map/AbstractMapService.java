@@ -1,10 +1,12 @@
 package com.siddhamyash.petclinicspring.service.map;
 
+import com.siddhamyash.petclinicspring.model.BaseEntity;
+
 import java.util.*;
 
-public abstract class AbstractMapService<ID, T> {
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
 
-    protected Map<ID,T> map = new HashMap<>();
+    protected Map<Long, T> map = new HashMap<>();
 
     Set<T> findAll(){
 //        return new HashSet<>(map.values());
@@ -19,9 +21,15 @@ public abstract class AbstractMapService<ID, T> {
         return map.get(id);
     }
 
-    T save(ID id, T object){
-        map.put(id, object);
-        //map.put(object, id);
+    T save(T object){
+        if(object!=null){
+            if(object.getId() == null){
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        }else {
+            throw new RuntimeException("Object cannot be null");
+        }
         return object;
     }
 
@@ -31,5 +39,15 @@ public abstract class AbstractMapService<ID, T> {
 
     void delete(T object){
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+
+    private Long getNextId(){
+        Long nextId = null;
+        try{
+            nextId = Collections.max(map.keySet()) + 1;
+        }catch (NoSuchElementException e){
+            nextId = 1L;
+        }
+        return nextId;
     }
 }

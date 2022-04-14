@@ -12,7 +12,6 @@
     <artifactId>pet-clinic-data</artifactId>
 
     <properties>
-        <start-class>com.siddhamyash.petclinicspring</start-class>
         <spring.boot.repackage.skip>true</spring.boot.repackage.skip>
     </properties>
 

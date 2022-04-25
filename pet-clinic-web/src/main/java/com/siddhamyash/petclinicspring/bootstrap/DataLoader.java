@@ -1,13 +1,13 @@
 package com.siddhamyash.petclinicspring.bootstrap;
 
 import com.siddhamyash.petclinicspring.model.Owner;
+import com.siddhamyash.petclinicspring.model.PetType;
 import com.siddhamyash.petclinicspring.model.Vet;
 import com.siddhamyash.petclinicspring.service.OwnerService;
+import com.siddhamyash.petclinicspring.service.PetTypeService;
 import com.siddhamyash.petclinicspring.service.VetService;
 import com.siddhamyash.petclinicspring.service.map.OwnerServiceMap;
 import com.siddhamyash.petclinicspring.service.map.VetServiceMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,47 +19,57 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerServiceMap ownerService, VetServiceMap vetService) {
+    public DataLoader(OwnerServiceMap ownerService, VetServiceMap vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-    var owner1 = new Owner();
-//    owner1.setId(1L);
-    owner1.setFirstName("Michael");
-    owner1.setLastName("Weston");
+        PetType dog = new PetType();
+        dog.setPetType("Dog");
+        PetType savedDogPetType = petTypeService.save(dog);
 
-    ownerService.save(owner1);
+        PetType cat = new PetType();
+        cat.setPetType("Cat");
+        PetType savedCatPetType = petTypeService.save(cat);
 
-    var owner2 = new Owner();
-//    owner1.setId(2L);
-    owner2.setFirstName("Michael 2");
-    owner2.setLastName("Weston 2");
+        var owner1 = new Owner();
+    //    owner1.setId(1L);
+        owner1.setFirstName("Michael");
+        owner1.setLastName("Weston");
 
-    ownerService.save(owner2);
+        ownerService.save(owner1);
 
-//    log.info("Loaded Owners....");
-    System.out.println("Loaded Owners....");
+        var owner2 = new Owner();
+    //    owner1.setId(2L);
+        owner2.setFirstName("Michael 2");
+        owner2.setLastName("Weston 2");
 
-    var vet1 = new Vet();
-//    vet1.setId(1L);
-    vet1.setFirstName("Sam");
-    vet1.setLastName("Axe");
+        ownerService.save(owner2);
 
-    vetService.save(vet1);
+    //    log.info("Loaded Owners....");
+        System.out.println("Loaded Owners....");
 
-    var vet2 = new Vet();
-//    vet2.setId(2L);
-    vet2.setFirstName("Sam 2");
-    vet2.setLastName("Axe 2");
+        var vet1 = new Vet();
+    //    vet1.setId(1L);
+        vet1.setFirstName("Sam");
+        vet1.setLastName("Axe");
 
-    vetService.save(vet2);
+        vetService.save(vet1);
 
-//    log.info("Loaded Vets....");
+        var vet2 = new Vet();
+    //    vet2.setId(2L);
+        vet2.setFirstName("Sam 2");
+        vet2.setLastName("Axe 2");
+
+        vetService.save(vet2);
+
+    //    log.info("Loaded Vets....");
 
     }
 }

@@ -1,9 +1,12 @@
 package com.siddhamyash.petclinicspring.service.map;
 import com.siddhamyash.petclinicspring.model.Pet;
 import com.siddhamyash.petclinicspring.service.PetService;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
@@ -32,5 +35,4 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
     public Pet findById(Long id) {
         return super.findById(id);
     }
-
 }

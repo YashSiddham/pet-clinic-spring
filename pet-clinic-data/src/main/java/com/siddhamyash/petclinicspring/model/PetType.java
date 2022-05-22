@@ -4,8 +4,8 @@ public class PetType extends BaseEntity{
 
     private String name;
 
-    public PetType(String petType) {
-        this.name = petType;
+    public PetType() {
+//        this.name = petType;
     }
 
     public String getPetType() {
